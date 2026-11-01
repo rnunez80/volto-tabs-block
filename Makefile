@@ -44,7 +44,7 @@ endif
 ##############################################################################
 # SETTINGS AND VARIABLE
 DIR=$(shell basename $$(pwd))
-NODE_MODULES?="../../../node_modules"
+NODE_MODULES?="../../node_modules"
 PLONE_VERSION?=6
 VOLTO_VERSION?=18-yarn
 ADDON_PATH="${DIR}"
@@ -128,7 +128,7 @@ lint-fix:		## Fix ES Lint
 .PHONY: i18n
 i18n:			## i18n
 	rm -rf build/messages
-	NODE_ENV=development $(NODE_MODULES)/.bin/i18n --addon
+	NODE_ENV=development node_modules/.bin/i18n --addon
 
 .PHONY: help
 help:                   ## Show this help.

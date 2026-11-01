@@ -50,10 +50,10 @@ export const AssetTab = ({ props, tabIndex, tabTitle }) => {
         <Image
           src={
             isInternalURL(imageObject['@id'])
-              ? `${flattenToAppURL(imageObject['@id'])
-              }/${imageObject?.image_scales?.image?.[0].scales?.[imageSize]?.download ||
-              imageObject?.image_scales?.image?.[0].download
-              }`
+              ? `${flattenToAppURL(imageObject['@id'])}/${
+                  imageObject?.image_scales?.image?.[0].scales?.[imageSize]
+                    ?.download || imageObject?.image_scales?.image?.[0].download
+                }`
               : imageObject['@id']
           }
           className={cx('ui', imageSize, 'aligned')}
@@ -101,7 +101,10 @@ const MenuItem = (props) => {
       tabChanged === true &&
       document?.getElementById(blockId)?.querySelector('#' + panelId)
     ) {
-      document.getElementById(blockId).querySelector('#' + panelId).focus();
+      document
+        .getElementById(blockId)
+        .querySelector('#' + panelId)
+        .focus();
       setTabChanged(false);
     }
   }, [tabChanged, panelId, blockId]);
@@ -246,35 +249,30 @@ const View = (props) => {
         role="tablist"
         aria-label={title || 'Tabs'}
         {...(vertical ? { 'aria-orientation': 'vertical' } : {})}
-        className={cx(
-          'ui menu',
-          'tabs-secondary-variant',
-          menuAlign,
-          {
-            [menuPosition.direction === 'left' ? 'border-right' : '']:
-              menuPosition.direction === 'left',
-            [menuPosition.direction === 'right' ? 'border-left' : '']:
-              menuPosition.direction === 'right',
-            [menuPosition.direction === 'top' ? 'border-bottom' : '']:
-              menuPosition.direction === 'top',
-            [menuPosition.direction === 'bottom' ? 'border-top' : '']:
-              menuPosition.direction === 'bottom',
-            secondary: menuSecondary,
-            pointing: menuPointing,
-            fluid: menuFluid,
-            stackable: menuStackable,
-            tabular: menuTabular,
-            text: menuText,
-            inverted: menuInverted,
-            borderless: menuBorderless,
-            [menuColor]: !!menuColor,
-            [menuSize]: !!menuSize,
-            container: isContainer,
-            [menuPosition.attached ? `${menuPosition.attached} attached` : '']:
-              !!menuPosition.attached,
-            vertical: menuPosition.vertical,
-          },
-        )}
+        className={cx('ui menu', 'tabs-secondary-variant', menuAlign, {
+          [menuPosition.direction === 'left' ? 'border-right' : '']:
+            menuPosition.direction === 'left',
+          [menuPosition.direction === 'right' ? 'border-left' : '']:
+            menuPosition.direction === 'right',
+          [menuPosition.direction === 'top' ? 'border-bottom' : '']:
+            menuPosition.direction === 'top',
+          [menuPosition.direction === 'bottom' ? 'border-top' : '']:
+            menuPosition.direction === 'bottom',
+          secondary: menuSecondary,
+          pointing: menuPointing,
+          fluid: menuFluid,
+          stackable: menuStackable,
+          tabular: menuTabular,
+          text: menuText,
+          inverted: menuInverted,
+          borderless: menuBorderless,
+          [menuColor]: !!menuColor,
+          [menuSize]: !!menuSize,
+          container: isContainer,
+          [menuPosition.attached ? `${menuPosition.attached} attached` : '']:
+            !!menuPosition.attached,
+          vertical: menuPosition.vertical,
+        })}
       >
         {tabsList.map((tab, index) => (
           <MenuItem
